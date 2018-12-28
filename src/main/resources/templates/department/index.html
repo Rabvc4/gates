@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+      lang="en"
+>
+<head th:replace="fragments :: head"></head>
+<body class="bg-light">
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+
+    <main role="main"
+          class="container"
+    >
+
+        <div class="py-5 text-center">
+            <h2 th:text="${title}">Default Title</h2>
+        </div>
+
+        <a th:href="@{/department/add}"
+           class="btn btn-primary"
+        >+<i class="fa fa-user"
+             aria-hidden="true"
+        ></i> New Department
+        </a>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div th:unless="${departments.size()}"
+                     class="list-group-item"
+                >No employees - You'll need to add some roles before employees, head to the
+                    <a th:href="@{/manage}">Manager</a>
+                 tab
+                </div>
+                <div class="card"
+                     th:if="${departments} and ${departments.size()}"
+                >
+                    <div class="row"
+                         th:each="department : ${departments}"
+                    >
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a th:href="@{/department/(id=${department.id})}"
+                                       th:text="${department.name}"
+                                    ></a>
+                                </h5>
+                                <!--TODO - make this allocations -->
+
+                                <!--<p class="card-text" th:text="${department.role.name}">Role</p>-->
+
+                                <!--TODO - make this allocations -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+
+    <section th:replace="fragments :: scripts"></section>
+
+</body>
+</html>

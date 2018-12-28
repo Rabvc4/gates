@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+      lang="en"
+>
+<head th:replace="fragments :: head"></head>
+<body class="bg-light">
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+
+    <main role="main"
+          class="container"
+    >
+
+        <div class="py-5 text-center">
+            <h2 th:text="${title}">Default Title</h2>
+        </div>
+
+        <a th:href="@{/manage/add-role}"
+           class="btn btn-primary"
+        >+<i class="fas fa-briefcase" aria-hidden="true"></i> Add Role</a>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div th:unless="${roles.size()}" class="list-group-item list-group-item-action">No roles</div>
+                <ul th:if="${roles} and ${roles.size()}" class="list-group">
+                    <li th:each="role : ${roles}" class="list-group-item">
+                        <a th:href="@{/manage/role/(id=${role.id})}"
+                           th:text="${role.name}"
+                        ></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+
+    <section th:replace="fragments :: scripts"></section>
+
+</body>
+</html>

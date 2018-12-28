@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+
+    <title th:if="${title}" th:text="${title}">Coding Challenge</title>
+
+</head>
+<body>
+
+    <nav th:fragment="navigation" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:with="currentUrl=${#request.requestURI}">
+        <a class="navbar-brand" th:href="@{/}">GATES</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+            <ul id="nav" class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" name="Home is where you live" th:classappend="${#strings.equals(currentUrl, '/')} ? 'active'">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/employee}" name="All employees" th:classappend="${#strings.equals(currentUrl, '/employee')} ? 'active'">Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/manage/role}" name="List of all roles" th:classappend="${#strings.equals(currentUrl, '/manage/role')} ? 'active'">Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/manage}" name="Manage employees and roles" th:classappend="${#strings.equals(currentUrl, '/manage')} ? 'active'">Manage</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    </div>
+
+    <section th:fragment="scripts" class="my-5 pt-5 text-muted text-center text-small">
+        <!-- Bootstrap core JavaScript
+================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script th:src="@{//code.jquery.com/jquery-latest.min.js}" type="text/javascript"></script>
+        <script type="text/javascript" th:href="@{/bootstrap/assets/js/vendor/popper.min.js}"></script>
+        <script type="text/javascript" th:src="@{/bootstrap/assets/js/vendor/holder.min.js}"></script>
+        <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    </section>
+
+</body>
+</html>

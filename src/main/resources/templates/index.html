@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+
+    <main role="main" >
+
+        <section class="jumbotron text-center main">
+            <div>
+                <a href="https://www.linkedin.com/in/ryanabest/"><img src="https://media.licdn.com/dms/image/C4D03AQFtIvk33KvnKA/profile-displayphoto-shrink_200_200/0?e=1551312000&v=beta&t=UqVsvuoeyF6DWzuGF48yV4uMo17KvO2g45atp1riv7o" class="border border-success rounded-circle" alt="logo" /></a>
+                <h1 class="jumbotron-heading" th:text="${title}">Default Title</h1>
+                <a href="https://www.linkedin.com/in/ryanabest/" class="btn btn-success"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="mailto:ryanbest3@me.com?Subject=You%20rock" class="btn btn-success"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </section>
+    </main>
+
+
+
+    <section th:replace="fragments :: scripts"></section>
+
+</body>
+</html>

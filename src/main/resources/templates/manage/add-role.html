@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+      lang="en"
+>
+<head th:replace="fragments :: head"></head>
+<body>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <main class="container">
+        <div class="py-5 text-center">
+            <h2 th:text="${title}">Default Title</h2>
+        </div>
+
+
+        <div class="col-md-8 mx-auto">
+        <form method="post"
+              th:object="${role}"
+              class="needs-validation"
+        >
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label th:for="name">Title</label>
+                        <input class="form-control"
+                               th:type="text"
+                               th:field="*{name}"
+                               required
+                        />
+                        <div th:errors="*{name}"
+                             class="error"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label th:for="earnings">Earnings</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input th:type="text"
+                               class="form-control"
+                               th:field="*{earnings}"
+                               aria-label="Amount (to the nearest dollar)"
+                               required
+                        >
+                        <div class="input-group-append">
+                            <span class="input-group-text">.00</span>
+                        </div>
+                        <div th:errors="*{earnings}"
+                             class="error"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+
+            <input class="btn btn-primary btn-lg btn-block"
+                   type="submit"
+                   value="Add New Role"
+            />
+
+        </form>
+        </div>
+
+    </main>
+
+
+    <section th:replace="fragments :: scripts"></section>
+
+</body>
+</html>
