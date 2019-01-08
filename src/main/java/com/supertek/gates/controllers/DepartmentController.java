@@ -30,6 +30,7 @@ public class DepartmentController {
             if (department != null) {
                 model.addAttribute("title", department.getName());
                 model.addAttribute("department", department);
+                model.addAttribute("employees", department.getMembers());
 
                 return "department/details";
             } else {

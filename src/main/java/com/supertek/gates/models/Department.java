@@ -3,9 +3,6 @@ package com.supertek.gates.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,6 @@ public class Department {
 
     @OneToMany(mappedBy="department")
     private List<Employee> members = new ArrayList<>();
-
-    private Integer allocation;
 
     public Department() {
     }
@@ -76,11 +71,12 @@ public class Department {
         this.members = members;
     }
 
-    public Integer getAllocation() {
+    public int getAllocation() {
+        int allocation = 0;
+        for (Employee employee :
+                this.members) {
+            allocation += employee.getRole().getEarnings();
+        }
         return allocation;
-    }
-
-    public void setAllocation(Integer allocation) {
-        this.allocation = allocation;
     }
 }

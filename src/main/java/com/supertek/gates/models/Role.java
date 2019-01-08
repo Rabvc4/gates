@@ -1,6 +1,7 @@
 package com.supertek.gates.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -27,6 +28,7 @@ public class Role  {
     @NotNull
     @Min(value = 1, message = "Employees need to earn at least $1 for tax reasons")
     @Max(value = 4000, message = "That's more than twice what Developers earn, contact them if this is correct.")
+    @NumberFormat(pattern = "#,###")
     private Integer earnings;
 
     @OneToMany(mappedBy="role")

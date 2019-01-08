@@ -5,20 +5,33 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
+    <section class="jumbotron text-center main">
+        <div>
+            <a href="https://www.linkedin.com/in/ryanabest/"><img src="https://media.licdn.com/dms/image/C4D03AQFtIvk33KvnKA/profile-displayphoto-shrink_200_200/0?e=1551312000&v=beta&t=UqVsvuoeyF6DWzuGF48yV4uMo17KvO2g45atp1riv7o" class="border border-success rounded-circle" alt="logo" /></a>
+            <h1 class="jumbotron-heading" th:text="${title}">Default Title</h1>
+            <a href="https://www.linkedin.com/in/ryanabest/" class="btn btn-success"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="mailto:ryanbest3@me.com?Subject=You%20rock" class="btn btn-success"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+    </section>
 
-    <main role="main" >
+    <main role="main" class="container" >
 
-        <section class="jumbotron text-center main">
-            <div>
-                <a href="https://www.linkedin.com/in/ryanabest/"><img src="https://media.licdn.com/dms/image/C4D03AQFtIvk33KvnKA/profile-displayphoto-shrink_200_200/0?e=1551312000&v=beta&t=UqVsvuoeyF6DWzuGF48yV4uMo17KvO2g45atp1riv7o" class="border border-success rounded-circle" alt="logo" /></a>
-                <h1 class="jumbotron-heading" th:text="${title}">Default Title</h1>
-                <a href="https://www.linkedin.com/in/ryanabest/" class="btn btn-success"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="mailto:ryanbest3@me.com?Subject=You%20rock" class="btn btn-success"><i class="fas fa-envelope"></i> Email</a>
+        <div class="mx-auto text-center col-md-8">
+            <h4>Details</h4>
+            <p>I believe you'll find the application works as expected by the provided Coding Challenge PDF. I tried to implement as much of what was asked for in the job description as seemed practical for the application. I also wanted to make sure it wasn't horrible to look at and allowed you a few additional functions that would actually demonstrate ability:</p>
+            <div class="mx-auto text-left">
+                <div><i class="fas fa-hand-point-right"></i> Departments are their own entity, not just implied from the managerial hierarchy.</div>
+                <div><i class="fas fa-hand-point-right"></i> Roles and Departments can be changed</div>
+                <div><i class="fas fa-hand-point-right"></i> Employees can be terminated</div>
+                <div><i class="fas fa-hand-point-right"></i> Data validation (of course)</div>
+                <div><i class="fas fa-hand-point-right"></i> Employee search</div>
+                <div><i class="fas fa-hand-point-right"></i> Most managerial functions are under the same mapping to allow a request interceptor to block access based upon privileges</div>
+                <div><i class="fas fa-hand-point-right"></i> You'll need to make roles and departments before creating employees, but feel free to enjoy the prompts indicating this throughout the app</div>
+                <div><i class="fas fa-hand-point-right"></i> My goal was to have managerial functions indicated by <span class="btn btn-success btn-sm">green buttons</span> and general functions to be <span class="btn btn-primary btn-sm">blue buttons</span></div>
+                <div><i class="fas fa-hand-point-right"></i> When in doubt: what you're looking for will be under the <a th:href="@{/manage}">Manage</a> tab</div>
             </div>
-        </section>
+        </div>
     </main>
-
-
 
     <section th:replace="fragments :: scripts"></section>
 

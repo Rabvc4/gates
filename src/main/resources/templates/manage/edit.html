@@ -33,7 +33,7 @@
                             <input class="form-control"
                                    th:type="text"
                                    th:field="*{firstName}"
-                                   required
+                                   readonly
                             />
                             <div th:errors="*{firstName}"
                                  class="error"
@@ -48,7 +48,7 @@
                             <input class="form-control"
                                    th:type="text"
                                    th:field="*{lastName}"
-                                   required
+                                   readonly
                             />
                             <div th:errors="*{lastName}"
                                  class="error"

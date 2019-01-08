@@ -16,6 +16,7 @@
 </head>
 <body>
 
+<!--Navbar-->
     <nav th:fragment="navigation" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:with="currentUrl=${#request.requestURI}">
         <a class="navbar-brand" th:href="@{/}">GATES</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +32,10 @@
                     <a class="nav-link" th:href="@{/employee}" name="All employees" th:classappend="${#strings.equals(currentUrl, '/employee')} ? 'active'">Employees</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/manage/role}" name="List of all roles" th:classappend="${#strings.equals(currentUrl, '/manage/role')} ? 'active'">Roles</a>
+                    <a class="nav-link" th:href="@{/role}" name="List of all roles" th:classappend="${#strings.equals(currentUrl, '/role')} ? 'active'">Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/department}" name="List of all departments" th:classappend="${#strings.equals(currentUrl, '/department')} ? 'active'">Departments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/manage}" name="Manage employees and roles" th:classappend="${#strings.equals(currentUrl, '/manage')} ? 'active'">Manage</a>
@@ -41,6 +45,59 @@
         </div>
     </nav>
 
+<!--Employee List-->
+    <div th:fragment="employee-list"
+    >
+        <div th:unless="${employees} and ${employees.size()}"
+             class="alert alert-info"
+        ><strong>No employees found!</strong> - You may need to add some (along with roles and departments). Head to the
+            <a th:href="@{/manage}">Manage</a> tab to get started.
+        </div>
+        <div class="card flex-md-row box-shadow h-md-100"
+             th:if="${employees} and ${employees.size()}"
+             th:each="employee : ${employees}"
+        >
+            <img class="card-img-left flex-auto d-none d-md-block rounded" alt="Employee Image" style="width: 100px; height: 100px;"
+                 th:src="@{/images/img_avatar.png}"
+            >
+            <div class="card-body d-flex flex-column align-items-start">
+                <h3 class="mb-0">
+                    <a th:href="@{/employee/(id=${employee.id})}" th:text="${employee.name}">Name</a>
+                </h3>
+                <strong class="d-inline-block mb-2" th:text="${employee.role.name}">Role</strong>
+                <div class="mb-1 text-muted" th:text="${employee.department.name}">Department</div>
+            </div>
+        </div>
+    </div>
+
+<!--Manager List-->
+    <div class="col-md-6"
+         th:fragment="manager-list"
+    >
+        <div th:unless="${managers} and ${managers.size()}"
+             class="alert alert-info"
+        ><strong>No employees found!</strong> - You may need to add some (along with roles and departments). Head to the
+            <a th:href="@{/manage}">Manage</a> tab to get started.
+        </div>
+        <div class="card flex-md-row box-shadow h-md-100"
+             th:if="${managers} and ${managers.size()}"
+             th:each="manager : ${managers}"
+        >
+            <img class="card-img-left flex-auto d-none d-md-block rounded" alt="Employee Image" style="width: 100px; height: 100px;"
+                 th:src="@{/images/img_avatar.png}"
+            >
+            <div class="card-body d-flex flex-column align-items-start">
+                <h3 class="mb-0">
+                    <a th:href="@{/employee/(id=${manager.id})}" th:text="${manager.name}">Name</a>
+                    <input th:formaction="@{'/manage/manager/' + ${employee.id}(id=${manager.id})}"
+                           class="btn btn-success btn-sm"
+                           type="submit"
+                           value="Set as Manager"/>
+                </h3>
+                <strong class="d-inline-block mb-2" th:text="${manager.role.name}">Role</strong>
+                <div class="mb-1 text-muted" th:text="${manager.department.name}">Department</div>
+            </div>
+        </div>
     </div>
 
     <section th:fragment="scripts" class="my-5 pt-5 text-muted text-center text-small">

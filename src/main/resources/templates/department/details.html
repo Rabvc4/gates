@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="bg-light">
 
     <nav th:replace="fragments :: navigation"></nav>
 
     <main class="container">
 
-        <div class="py-5 text-center">
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h2 th:text="${title}">Default Title</h2>
+            <p th:text="${department.description}"></p>
         </div>
 
-        <!--<div th:if="${department.allocation}" th:text="${employee.allocation}"></div>-->
+        <div th:unless="${employees} and ${employees.size()}"
+             class="alert alert-info"
+        ><strong>Department is empty!</strong> - Assign some employees to this department or consider removing it.
+        </div>
+        <div th:if="${employees} and ${employees.size()}"
+             class="col-md-6"
+        >
+            <h3>$<span th:text="${department.allocation}"></span><small class="text-muted"> / mo</small></h3>
+            <div th:replace="fragments :: employee-list"></div>
+        </div>
 
     </main>
 

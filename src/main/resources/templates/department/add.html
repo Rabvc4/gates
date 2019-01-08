@@ -3,15 +3,15 @@
       lang="en"
 >
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="bg-light">
 
     <nav th:replace="fragments :: navigation"></nav>
 
     <main class="container">
-        <div class="py-5 text-center">
+
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h2 th:text="${title}">Default Title</h2>
         </div>
-
 
         <div class="col-md-8 mx-auto">
             <form method="post"
@@ -63,7 +63,6 @@
         </div>
 
     </main>
-
 
     <section th:replace="fragments :: scripts"></section>
 

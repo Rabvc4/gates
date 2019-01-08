@@ -1,18 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="bg-light">
 
     <nav th:replace="fragments :: navigation"></nav>
 
     <main class="container">
 
-        <div class="py-5 text-center">
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h2 th:text="${title}">Default Title</h2>
+            <p class="card-subtitle mb-2">Allocation: $<span th:text="${employee.allocation}"></span><small class="text-muted"> / mo</small></p>
         </div>
 
-        <div th:if="${employee.role}" th:text="${employee.role.name}"></div>
-        <div th:if="${employee.role}" th:text="${'$' + employee.role.earnings}"></div>
+        <div class="row">
+            <div class="col-md-6 order-md-1 mb-4">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0 my-auto">
+                                <a th:href="@{/role/(id=${employee.role.id})}"
+                                   th:text="${employee.role.name}">Role</a>
+                            </h6>
+                            <small class="card-subtitle mb-2">$<span th:text="${employee.role.earnings}"></span><small class="text-muted"> / mo</small></small>
+                        </div>
+                        <a th:href="@{'/manage/edit/' + ${employee.id}}"
+                           class="btn btn-secondary btn-sm my-auto"
+                        >Change Role</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                    <span class="my-0 my-auto">
+                        <a th:href="@{/department/(id=${employee.department.id})}"
+                           th:text="${employee.department.name}">Department</a>
+                    </span>
+                        <a th:href="@{'/manage/edit/' + ${employee.id}}"
+                           class="btn btn-secondary btn-sm my-auto"
+                        >Change Department</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between"
+                        th:if="${employee.manager}"
+                    >
+                    <span class="my-0 my-auto">
+                        <a th:href="@{/employee/(id=${employee.manager.id})}"
+                           th:text="${employee.manager.name}">Manager</a>
+                    </span>
+                        <a th:href="@{'/manage/manager/' + ${employee.id}}"
+                           class="btn btn-secondary btn-sm my-auto"
+                        >Change Manager</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between"
+                        th:unless="${employee.manager}"
+                    >
+                        <span class="my-auto">No manager</span>
+                        <a th:href="@{'/manage/manager/' + ${employee.id}}"
+                           class="btn btn-secondary btn-sm my-auto"
+                        >Set Manager</a>
+                    </li>
+                </ul>
+
+                <form class="card p-2" th:action="@{'/manage/terminate/' + ${employee.id}}" method="post">
+                    <div class="input-group">
+                        <input type="text" class="form-control" th:name="terminate" placeholder="Type 'Terminate'" autocomplete="off">
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-danger rounded-right" value="Terminate"/>
+                        </div>
+                        <div th:text="*{message}"
+                             class="error"
+                        ></div>
+                    </div>
+                </form>
+            </div>
+            <div th:if="${employee.subordinates.size()}"
+                 class="col-md-6 order-md-2 mb-4"
+                 th:with="employees=${employee.subordinates}"
+            >
+                <h5 class="text-center">Direct Subordinates</h5>
+
+                <div th:replace="fragments :: employee-list"></div>
+            </div>
+        </div>
+
+
 
     </main>
 

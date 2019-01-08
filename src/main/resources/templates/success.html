@@ -8,9 +8,8 @@
     <main role="main" class="inner cover text-center">
 
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-            <h1 class="cover-heading" th:text="${#strings.defaultString(title, 'Hey!')}">Default Title</h1>
-            <p class="lead" th:text="${#strings.defaultString(message, 'Why are you breaking my things?')} or ${#strings.equals(message, 'No message available')} ? 'Why are you breaking my things?'">Why are you breaking my things?</p>
-            <p class="lead" th:if="${error}" th:text="${error}" >
+            <h1 class="cover-heading" th:text="${title}">Default Title</h1>
+            <p class="lead" th:text="${message}">Message</p>
             <p class="lead">
                 <a href="/" class="btn btn-lg btn-danger">Go Home</a>
             </p>

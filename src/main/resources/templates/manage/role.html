@@ -13,14 +13,14 @@
             <h2 th:text="${title}">Default Title</h2>
         </div>
 
-        <div th:unless="${roles} and ${roles.size()} and ${departments} and ${departments.size()}"
+        <div th:unless="${roles} and ${roles.size()}"
              class="alert alert-warning"
         ><strong>Warning!</strong> You won't be able to create new employees until a manager add roles and departments. Head to the
             <a th:href="@{/manage}">Manage</a> tab to get started.
         </div>
 
         <div class="col-md-8 mx-auto"
-             th:if="${roles} and ${roles.size()} and ${departments} and ${departments.size()}"
+             th:if="${roles} and ${roles.size()}"
         >
             <form method="post"
                   th:object="${employee}"
@@ -115,7 +115,7 @@
 
                 <input class="btn btn-primary btn-lg btn-block"
                        type="submit"
-                       th:value="${submit}"
+                       value="Add New Employee"
                 />
 
             </form>

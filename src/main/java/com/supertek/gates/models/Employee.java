@@ -33,25 +33,28 @@ public class Employee {
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name="employee_id")
     private Employee manager;
 
-    @OneToMany(mappedBy="manager")
+    @OneToMany
+    @JoinColumn(name = "manager_id")
     private List<Employee> subordinates = new ArrayList<>();
 
-    private Integer allocation;
-
+    @NotNull(message = "All employees require a department")
     @ManyToOne
     @JoinColumn(name="department_id")
     private Department department;
 
+    @NotNull
+    private Boolean isCurrent = true;
+
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, Role role) {
+    public Employee(String firstName, String lastName, Role role, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.department = department;
     }
 
     public int getId() {
@@ -83,13 +86,7 @@ public class Employee {
     }
 
     public void setRole(Role role) {
-        if (this.manager != null) {
-            this.manager.allocation -= this.allocation;
-        }
         this.role = role;
-        if (manager != null) {
-            this.manager.allocation -= this.allocation;
-        }
     }
 
     public Employee getManager() {
@@ -97,13 +94,7 @@ public class Employee {
     }
 
     public void setManager(Employee manager) {
-        if (this.manager != null) {
-            this.manager.allocation -= this.allocation;
-        }
         this.manager = manager;
-        if (manager != null) {
-            this.manager.allocation -= this.allocation;
-        }
     }
 
     public List<Employee> getSubordinates() {
@@ -114,12 +105,13 @@ public class Employee {
         this.subordinates = subordinates;
     }
 
-    public Integer getAllocation() {
-        return allocation + role.getEarnings();
-    }
-
-    public void setAllocation(Integer allocation) {
-        this.allocation = allocation;
+    public int getAllocation() {
+        int allocation = this.getRole().getEarnings();
+        for (Employee employee :
+                this.subordinates) {
+            allocation += employee.getAllocation();
+        }
+        return allocation;
     }
 
     public Department getDepartment() {
@@ -127,13 +119,14 @@ public class Employee {
     }
 
     public void setDepartment(Department department) {
-        Integer newAllocation = 0;
-        if (this.department != null) {
-            newAllocation = this.department.getAllocation();
-            this.department.setAllocation(newAllocation - role.getEarnings());
-        }
         this.department = department;
-        newAllocation = this.department.getAllocation();
-        this.department.setAllocation(newAllocation - role.getEarnings());
+    }
+
+    public Boolean getCurrent() {
+        return isCurrent;
+    }
+
+    public void setCurrent(Boolean current) {
+        isCurrent = current;
     }
 }

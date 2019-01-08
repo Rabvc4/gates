@@ -5,13 +5,11 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-
-
     <main role="main">
 
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4" th:text="${title}">Title</h1>
-            <p class="lead">In this area someone with a managerial role can examine their monthly allocations and create job functions</p>
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h2 th:text="${title}">Title</h2>
+            <p class="lead">In this area someone with a managerial role can create job functions(Roles), departments and employees. I would've added buttons for managing Role and Departments, but I didn't want to get carried away with things you didn't ask for</p>
         </div>
 
         <div class="container">
@@ -31,7 +29,7 @@
                         <h4 class="my-0 font-weight-normal">Roles</h4>
                     </div>
                     <div class="card-body">
-                        <a th:href="@{/manage/add-role}"
+                        <a th:href="@{/role/add}"
                            class="btn btn-lg btn-block btn-success"
                         >+<i class="fas fa-briefcase" aria-hidden="true"></i> New Role</a>
                     </div>
@@ -49,11 +47,6 @@
             </div>
         </div>
     </main>
-
-
-
-
-
 
     <section th:replace="fragments :: scripts"></section>
 
